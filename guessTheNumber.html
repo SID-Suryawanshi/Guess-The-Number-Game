@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Number</title>
+    <style>
+      body {
+        background-color: #212121;
+        text-align: center;
+        margin-top: 20rem;
+      }
+      .input {
+        padding: 1rem;
+        border: none;
+        border-radius: 1rem;
+        outline: none;
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 1rem;
+        border: none;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        background-color: orange;
+        cursor: pointer;
+      }
+      .btn:hover {
+        opacity: 0.8;
+      }
+      .btn:active {
+        box-shadow: 0 0 20px orange;
+      }
+      .visibility {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="Guess the number" class="input" />
+    <button class="btn">Guess</button>
+
+    <script>
+      const inputField = document.querySelector(".input");
+      const guessBtn = document.querySelector(".btn");
+      const computerGuess = Math.round(1 + Math.random() * 100);
+      console.log("Computer Guess :", computerGuess);
+      const span = document.createElement("span");
+      document.querySelector("body").appendChild(span);
+      span.style.color = "#fff";
+      span.classList.add("visibility");
+
+      let btnClick = true;
+      guessBtn.addEventListener("click", () => {
+        const inputText = parseFloat(inputField.value);
+        console.log("Player Guess :", inputText);
+
+        if (btnClick) {
+          if (inputText === computerGuess) {
+            span.classList.remove("visibility");
+            inputField.classList.add("visibility");
+            guessBtn.classList.add("visibility");
+            span.appendChild(
+              document.createTextNode("You guessed the number!")
+            );
+            console.log("You guessed the number!");
+            btnClick = true;
+          } else {
+            span.classList.remove("visibility");
+            inputField.classList.add("visibility");
+            guessBtn.classList.add("visibility");
+            span.appendChild(
+              document.createTextNode("You have lost the game!")
+            );
+            console.log("You have lost the game");
+            btnClick = false;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
